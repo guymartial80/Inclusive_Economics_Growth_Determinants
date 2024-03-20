@@ -2,6 +2,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn import metrics
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestRegressor
+import time
 
 
 def importer_affichage_dataset(chemin_fichier):
@@ -271,8 +278,8 @@ def modelling(X_train, y_train, X_val, y_val, X_test, y_test, numerical_variable
     - best_model: Meilleur temps d'exécution
     """
     models = [
-        ('La Forêt Aléatoire', RandomForestClassifier()),
-        ('La Regression Logistique', LogisticRegression())
+        # ('La Forêt Aléatoire', RandomForestClassifier()),
+        # ('La Regression Logistique', LogisticRegression())
     ]
     
     best_model = None
@@ -302,12 +309,12 @@ def modelling(X_train, y_train, X_val, y_val, X_test, y_test, numerical_variable
         
         # Calcul et affichage des métriques
         print(f"Metriques pour {model_name}:")
-        print(classification_report(y_test, y_pred))
+        # print(classification_report(y_test, y_pred))
         
         # Affichage de la matrice de confusion
-        cm = confusion_matrix(y_test, y_pred)
+        # cm = confusion_matrix(y_test, y_pred)
         plt.figure(figsize=(6, 4))
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=['No', 'Yes'], yticklabels=['No', 'Yes'])
+        # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=['No', 'Yes'], yticklabels=['No', 'Yes'])
         plt.xlabel('Predicted labels')
         plt.ylabel('True labels')
         plt.title(f'Matrice de Confusion pour {model_name}')
@@ -319,10 +326,10 @@ def modelling(X_train, y_train, X_val, y_val, X_test, y_test, numerical_variable
         y_prob = pipeline.predict_proba(X_test)[:, 1]
         
         # Calcul et affichage de la courbe ROC
-        fpr, tpr, _ = roc_curve(y_test_binary, y_prob)
-        roc_auc = roc_auc_score(y_test_binary, y_prob)
+        # fpr, tpr, _ = roc_curve(y_test_binary, y_prob)
+        # roc_auc = roc_auc_score(y_test_binary, y_prob)
         plt.figure(figsize=(6, 4))
-        plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+        # plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
         plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
         plt.xlim([0.0, 1.0])
         plt.ylim([0.0, 1.05])
@@ -333,16 +340,16 @@ def modelling(X_train, y_train, X_val, y_val, X_test, y_test, numerical_variable
         plt.show()
         
         # Mise à jour du meilleur modèle
-        accuracy = accuracy_score(y_val, pipeline.predict(X_val))
+        # accuracy = accuracy_score(y_val, pipeline.predict(X_val))
         stop = time.time()
         runtime = stop - start
-        if accuracy > best_accuracy or (accuracy == best_accuracy and runtime < best_runtime):
-            best_model = pipeline
-            best_accuracy = accuracy
-            best_runtime = runtime
+        # if accuracy > best_accuracy or (accuracy == best_accuracy and runtime < best_runtime):
+            # best_model = pipeline
+            # best_accuracy = accuracy
+            # best_runtime = runtime
         
         # Stockage des performances
-        model_acc.append(accuracy)
+        # model_acc.append(accuracy)
         model_time.append(runtime)
     
     # Affichage du meilleur modèle

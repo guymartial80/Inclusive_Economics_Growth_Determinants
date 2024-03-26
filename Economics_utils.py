@@ -40,6 +40,44 @@ def importer_affichage_dataset(chemin_fichier):
     return df
 
 
+def count_countries_by_region(data):
+    # Compter le nombre de pays par région
+    region_counts = data['Region'].value_counts()
+
+    # Créer un DataFrame à partir des comptages
+    region_df = region_counts.reset_index()
+    region_df.columns = ['Region', 'Nombre de pays']
+
+    # Afficher le tableau
+    return region_df
+
+
+
+def plot_region_proportion(data):
+    # Créer un dictionnaire pour stocker le nombre de pays dans chaque région
+    region_counts = {}
+
+    # Définir la palette de couleurs en fonction du nombre unique de régions
+    palette = sns.color_palette("husl", len(data['Region'].unique()))
+
+    # Compter le nombre de pays dans chaque région
+    for region in data['Region']:
+        region_counts[region] = region_counts.get(region, 0) + 1
+
+    # Extraire les données du dictionnaire
+    regions = list(region_counts.keys())
+    counts = list(region_counts.values())
+
+    # Créer le graphique à barres
+    plt.figure(figsize=(10, 6))
+    plt.bar(regions, counts, color=palette)
+    plt.xlabel('Region')
+    plt.ylabel('Nombre de pays')
+    plt.title('Proportion de Régions dans chaque pays')
+    plt.xticks(rotation=90, ha='right')  # Rotation des étiquettes sur l'axe x
+    plt.tight_layout()  # Ajuster la disposition pour éviter que les étiquettes ne se chevauchent
+    plt.show()
+
 
 def plot_bar_chart_region(dataframe, x_column, y_column):
     # Définir la palette de couleurs en fonction du nombre unique de régions

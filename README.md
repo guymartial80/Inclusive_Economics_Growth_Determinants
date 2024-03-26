@@ -30,9 +30,9 @@ Calculs statistiques de base sur toutes les variables de type numérique du jeu 
 
 ### 2.4 EDA
 A cette étape, plusieurs démarches ont été sollicitées pour faciliter l'analyse :
-- Les statistiques univariées: Recueillir le nombre d'occurrences par variables de type catégoriel;
-- Les statistiques bivariées : Nombre d'occurrences de chaque variable catégorielle en fonction des modalités de la variable cible;
-- Les statistiques bivariées pour les variables  de type numérique : cela s'est fait par la matrice des corrélations et les boites à moustache.
+- Les statistiques univariées: Recueillir le nombre de pays par régions;
+- Les statistiques bivariées : Le cumul de l'effectif des populations par régions;
+- Les statistiques bivariées pour les variables  de type numérique : cela s'est fait par la matrice des corrélations.
 
 ### 2.5 Machine Learning
 - Séparation des variables (explicatives et expliquée);
